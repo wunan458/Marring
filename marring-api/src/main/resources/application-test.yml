@@ -1,0 +1,85 @@
+# Spring 配置
+spring:
+
+  redis:
+    host: 192.168.4.206
+    password:
+    port: 6379
+  # Mvc Options support, throw 404 exception
+  mvc:
+    dispatch-options-request: true
+    throw-exception-if-no-handler-found: true
+
+  # Options support
+  resources:
+    add-mappings: false
+
+  # postgresql 配置
+  datasource:
+    platform: postgresql
+    url: jdbc:postgresql://192.168.4.171:5432/model_market_test
+    username: test
+    password: test
+    driver-class-name: org.postgresql.Driver
+    # 连接池
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      idle-timeout: 10
+      poolName: SpringBootJPAHikariCP
+
+  # Show or not log for each sql query
+  jpa:
+    show-sql: true
+    hibernate:
+      # Hibernate ddl auto (create, create-drop, update): with "update" the database
+      # schema will be automatically updated accordingly to java entities found in
+      # the project
+      ddl-auto: update # create
+      # Naming strategy
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        show_sql: true
+
+  # Date format string (e.g. yyyy-MM-dd HH:mm:ss),
+  ## or a fully-qualified date format class name (e.g. com.fasterxml.jackson.databind.Util.ISO8601DateFormat)
+  jackson:
+    #  date-format: com.fasterxml.jackson.databind.Util.ISO8601DateFormat
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+
+
+  messages:
+    basename: i18n/messages
+
+logging:
+  level:
+    ROOT: INFO
+    org.springframework.web: DEBUG
+    org.springframework.cloud.netflix: DEBUG
+    org.mybatis: debug
+    com.dy.springboot.server.mapper: DEBUG
+
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+  type-aliases-package: com.matrixai.modelmarket.entity
+  mapper-locations: classpath:/mybatis/**/*.xml
+
+# MinIO文件系统
+minio:
+  url: http://192.168.4.203:9000
+  access: KFVBBLRSTHSMZERFCAZQ
+  secret: eBECcBcYnQucTpNliRovSM+NF5LLhuN+1mWU0HZf
+  bucket: model-store
+  model-path: models/
+  sdk-path: sdk/minor-1.0.0.jar
+
+pg-auth:
+  auth-url: https://api-b2b-qa.cn-pgcloud.com/paas-ssofed/v3/token/userinfo
+  auth-type: ssofed
+  ocp-apim-subscription-key: 0f3285293f234199b38ef3c9976d98fc
+  authorization: Bearer

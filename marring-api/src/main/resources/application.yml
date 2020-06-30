@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: matrix-ai
+
+  profiles:
+    active: ${spring_profiles_active:test}
+
+server:
+  port: 80
