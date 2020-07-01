@@ -1,6 +1,6 @@
 spring:
   application:
-    name: matrix-ai
+    name: marring
 
   profiles:
     active: ${spring_profiles_active:test}

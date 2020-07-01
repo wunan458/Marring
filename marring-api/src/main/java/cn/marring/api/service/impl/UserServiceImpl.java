@@ -6,6 +6,7 @@ import cn.marring.api.service.UserService;
 import cn.marring.common.Constants;
 import cn.marring.dao.entity.User;
 import cn.marring.dao.mapper.UserMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,7 +30,7 @@ public class UserServiceImpl extends BaseService implements UserService {
          /*
         check login user
          */
-        List<User> users = userMapper.queryAll(9);
+        List<User> users = userMapper.selectList(new QueryWrapper<>());
         result.put(Constants.DATA_LIST, users);
         putMsg(result, Status.SUCCESS);
         return result;

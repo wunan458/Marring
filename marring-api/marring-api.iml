@@ -8,8 +8,8 @@
       <configuration>
         <webroots />
         <sourceRoots>
-          <root url="file://$MODULE_DIR$/../marring-api/src/main/java" />
-          <root url="file://$MODULE_DIR$/../marring-api/src/main/resources" />
+          <root url="file://$MODULE_DIR$/src/main/java" />
+          <root url="file://$MODULE_DIR$/src/main/resources" />
         </sourceRoots>
       </configuration>
     </facet>
@@ -17,15 +17,14 @@
   <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
     <output url="file://$MODULE_DIR$/target/classes" />
     <output-test url="file://$MODULE_DIR$/target/test-classes" />
-    <content url="file://$MODULE_DIR$/../marring-api">
-      <sourceFolder url="file://$MODULE_DIR$/../marring-api/src/main/java" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/../marring-api/src/main/resources" type="java-resource" />
-      <sourceFolder url="file://$MODULE_DIR$/../marring-api/src/test/java" isTestSource="true" />
-      <excludeFolder url="file://$MODULE_DIR$/../marring-api/target" />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/main/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/main/resources" type="java-resource" />
+      <sourceFolder url="file://$MODULE_DIR$/src/test/java" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/target" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="matrix-ai-web" />
     <orderEntry type="library" name="Maven: com.github.jsqlparser:jsqlparser:2.0" level="project" />
     <orderEntry type="library" name="Maven: com.github.pagehelper:pagehelper-spring-boot-starter:1.2.13" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-starter:2.2.6.RELEASE" level="project" />
@@ -87,7 +86,6 @@
     <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:2.0.2" level="project" />
     <orderEntry type="library" name="Maven: org.hibernate.validator:hibernate-validator:6.0.18.Final" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-webmvc:5.2.5.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.postgresql:postgresql:42.2.11" level="project" />
     <orderEntry type="library" name="Maven: org.projectlombok:lombok:1.18.12" level="project" />
     <orderEntry type="library" name="Maven: com.alibaba:fastjson:1.2.49" level="project" />
     <orderEntry type="library" name="Maven: io.springfox:springfox-swagger-ui:2.9.2" level="project" />
@@ -150,5 +148,6 @@
     <orderEntry type="library" name="Maven: io.netty:netty-transport:4.1.48.Final" level="project" />
     <orderEntry type="library" name="Maven: io.projectreactor:reactor-core:3.3.4.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.reactivestreams:reactive-streams:1.0.3" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.12" level="project" />
   </component>
 </module>

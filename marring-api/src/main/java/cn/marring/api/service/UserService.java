@@ -13,6 +13,4 @@ public interface UserService {
      * @return result map
      */
     Map<String, Object> queryAll();
-
-
 }

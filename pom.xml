@@ -61,10 +61,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -143,6 +139,13 @@
         <!--<artifactId>mybatis-spring-boot-starter</artifactId>-->
         <!--<version>2.0.0</version>-->
         <!--</dependency>-->
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>8.0.12</version>
+        </dependency>
+
     </dependencies>
     <build>
         <extensions>
@@ -179,7 +182,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.mininglamp.matrix.api.MatrixWebApplication</mainClass>
+                            <mainClass>cn.marring.api.MarringWebApplication</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

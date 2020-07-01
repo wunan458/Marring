@@ -1,6 +1,9 @@
-# Spring 配置
 spring:
 
+  redis:
+    host: marring.cn
+    password:
+    port: 6379
   # Mvc Options support, throw 404 exception
   mvc:
     dispatch-options-request: true
@@ -12,11 +15,11 @@ spring:
 
   # postgresql 配置
   datasource:
-    platform: postgresql
-    url: jdbc:postgresql://192.168.4.171:5432/model_market_test
-    username: test
-    password: test
-    driver-class-name: org.postgresql.Driver
+    platform: mysql
+    url: jdbc:mysql://marring.cn:8306/marring_test
+    username: root
+    password: marring8306
+    driver-class-name: com.mysql.cj.jdbc.Driver
     # 连接池
     type: com.zaxxer.hikari.HikariDataSource
     hikari:
@@ -36,7 +39,7 @@ spring:
         physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
+        dialect: org.hibernate.dialect.MySQL5Dialect
         show_sql: true
 
   # Date format string (e.g. yyyy-MM-dd HH:mm:ss),
@@ -45,10 +48,11 @@ spring:
     #  date-format: com.fasterxml.jackson.databind.Util.ISO8601DateFormat
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
-messages:
-  basename: i18n/messages
 
-# 日志级别配置
+
+  messages:
+    basename: i18n/messages
+
 logging:
   level:
     ROOT: INFO
@@ -59,22 +63,8 @@ logging:
 
 mybatis-plus:
   configuration:
-      log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-      default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
-  type-aliases-package: com.matrixai.modelmarket.entity
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    default-enum-type-handler: org.apache.ibatis.type.EnumOrdinalTypeHandler
+  type-aliases-package: cn.marring.dao.entity
   mapper-locations: classpath:/mybatis/**/*.xml
 
-# MinIO文件系统
-minio:
-  url: http://192.168.4.203:9000
-  access: KFVBBLRSTHSMZERFCAZQ
-  secret: eBECcBcYnQucTpNliRovSM+NF5LLhuN+1mWU0HZf
-  bucket: model-store
-  model-path: models/
-  sdk-path: sdk/minor-1.0.0.jar
-
-pg-auth:
-  auth-url: https://api-b2b-qa.cn-pgcloud.com/paas-ssofed/v3/token/userinfo
-  auth-type: ssofed
-  ocp-apim-subscription-key: 0f3285293f234199b38ef3c9976d98fc
-  authorization: Bearer
