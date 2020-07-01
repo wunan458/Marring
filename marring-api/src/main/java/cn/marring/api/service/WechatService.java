@@ -48,7 +48,7 @@ public class WechatService {
         String wxOpenId = response.getOpenid();
         String wxSessionKey = response.getSession_key();
         Consumer consumer = new Consumer();
-        consumer.setWechatOpenid(wxOpenId);
+        consumer.setOpenId(wxOpenId);
         loginOrRegisterConsumer(consumer);
 
         Long expires = response.getExpiresIn();

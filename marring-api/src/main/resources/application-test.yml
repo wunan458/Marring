@@ -1,7 +1,7 @@
 spring:
 
   redis:
-    host: marring.cn
+    host: 192.168.4.206
     password:
     port: 6379
   # Mvc Options support, throw 404 exception
@@ -16,7 +16,7 @@ spring:
   # postgresql 配置
   datasource:
     platform: mysql
-    url: jdbc:mysql://marring.cn:8306/marring_test
+    url: jdbc:mysql://marring.cn:8306/marring_test?autoReconnect=true&useSSL=false
     username: root
     password: marring8306
     driver-class-name: com.mysql.cj.jdbc.Driver

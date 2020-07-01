@@ -10,10 +10,19 @@ import lombok.Data;
 public class Consumer {
     private Long id;
     private String username;
-    private String wechatOpenid;
-    private Long phone;
+    private String openId;
+    private String phone;
+    /**
+     * 微信匿名
+     */
     private String nickname;
+    /**
+     * 微信头像地址
+     */
     private String avatarUrl;
+    /**
+     * 性别
+     */
     private Gender gender;
     private String email;
     private Long lastLoginTime;
