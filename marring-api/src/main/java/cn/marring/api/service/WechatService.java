@@ -1,10 +1,13 @@
 package cn.marring.api.service;
 
+import cn.marring.api.configuration.AppContext;
 import cn.marring.api.configuration.WechatAuthProperties;
+import cn.marring.api.enums.Status;
 import cn.marring.api.jpa.WechatAuthCodeResponse;
 import cn.marring.api.jpa.WechatAuthenticationResponse;
-import cn.marring.dao.entity.Consumer;
-import cn.marring.dao.mapper.ConsumerMapper;
+import cn.marring.dao.entity.User;
+import cn.marring.dao.mapper.UserMapper;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectReader;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -16,6 +19,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -23,11 +29,11 @@ import java.util.concurrent.TimeUnit;
  * @author Wn 2020-06-30 11:33
  */
 @Service
-public class WechatService {
+public class WechatService extends BaseService {
     private static final Logger LOGGER = LoggerFactory.getLogger(WechatService.class);
 
     @Autowired
-    private ConsumerMapper consumerMapper;
+    private UserMapper userMapper;
 
     /**
      * 服务器第三方session有效时间，单位秒, 默认1天
@@ -47,9 +53,9 @@ public class WechatService {
 
         String wxOpenId = response.getOpenid();
         String wxSessionKey = response.getSession_key();
-        Consumer consumer = new Consumer();
-        consumer.setOpenId(wxOpenId);
-        loginOrRegisterConsumer(consumer);
+        User user = new User();
+        user.setOpenId(wxOpenId);
+        loginOrRegisterConsumer(user);
 
         Long expires = response.getExpiresIn();
         String thirdSession = create3rdSession(wxOpenId, wxSessionKey, expires);
@@ -94,25 +100,49 @@ public class WechatService {
         return thirdSessionKey;
     }
 
-    private void loginOrRegisterConsumer(Consumer consumer) {
-      /*  Consumer consumer1 = consumerMapper.findConsumerByWechatOpenid(consumer.getWechatOpenid());
-        if (null == consumer1) {
-            consumerMapper.insertConsumer(consumer);
-        }*/
+    private void loginOrRegisterConsumer(User user) {
+        User insertUser = getUserByOpenId(user.getOpenId());
+        if (null == insertUser) {
+            userMapper.insert(user);
+        }
     }
 
-    public void updateConsumerInfo(Consumer consumer) {
-      /*  Consumer consumerExist = consumerMapper.findConsumerByWechatOpenid(AppContext.getCurrentUserWechatOpenId());
-        consumerExist.setUpdatedBy(1L);
-        consumerExist.setUpdatedAt(System.currentTimeMillis());
-        consumerExist.setGender(consumer.getGender());
-        consumerExist.setAvatarUrl(consumer.getAvatarUrl());
-        consumerExist.setWechatOpenid(consumer.getWechatOpenid());
-        consumerExist.setEmail(consumer.getEmail());
-        consumerExist.setNickname(consumer.getNickname());
-        consumerExist.setPhone(consumer.getPhone());
-        consumerExist.setUsername(consumer.getUsername());
-        consumerMapper.updateConsumer(consumerExist);*/
+    private User getUserByOpenId(String openId) {
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("open_id", openId);
+        userQueryWrapper.eq("deleted", 0);
+        return userMapper.selectOne(userQueryWrapper);
+    }
+
+    public Map<String, Object> updateConsumerInfo(User user) {
+        Map<String, Object> result = new HashMap<>(5);
+        updateConsumer(user);
+        putMsg(result, Status.SUCCESS);
+        return result;
+    }
+
+    private void updateConsumer(User user) {
+        User userExist = getUserByOpenId(AppContext.getCurrentUserWechatOpenId());
+        userExist.setLanguage(user.getLanguage());
+        userExist.setCity(user.getCity());
+        userExist.setCountry(user.getCountry());
+        userExist.setLastLoginTime(new Date());
+        userExist.setActiveJoinId(user.getActiveJoinId());
+        userExist.setUpdatedBy(AppContext.getCurrentUserWechatOpenId());
+        userExist.setCreateTime(new Date());
+        userExist.setUpdateTime(new Date());
+        userExist.setGender(user.getGender());
+        userExist.setAvatarUrl(user.getAvatarUrl());
+        userExist.setEmail(user.getEmail());
+        userExist.setNickname(user.getNickname());
+        userExist.setPhone(user.getPhone());
+        userExist.setUserName(user.getUserName());
+
+
+        QueryWrapper<User> userQueryWrapper = new QueryWrapper<>();
+        userQueryWrapper.eq("open_id", AppContext.getCurrentUserWechatOpenId());
+        userQueryWrapper.eq("deleted", 0);
+        userMapper.update(userExist, userQueryWrapper);
     }
 
 }

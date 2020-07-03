@@ -1,84 +1,70 @@
 package cn.marring.dao.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
+import cn.marring.dao.enums.Gender;
 import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
-import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
-import static cn.marring.common.Constants.PARAMETER_FORMAT_TIME_ON;
-
 /**
- * @author Wn 2020-06-12 11:22
+ * @author Wn 2020-06-30 11:31
  */
-@EqualsAndHashCode(callSuper = true)
 @Data
-@TableName("t_matrix_user")
-public class User extends BaseCreateEntity {
-    /**
-     * user id
-     */
+@TableName("t_marring_user")
+public class User {
+
     @TableId(value = "id", type = IdType.AUTO)
     private int id;
-    /**
-     * employee number
-     */
-    private int employeeNumber;
-    /**
-     * user name
-     */
+
     private String userName;
     /**
-     * user password
+     * 微信唯一主键
      */
-    private String userPassword;
+    private String openId;
     /**
-     * state
+     * 微信匿名
      */
-    private int state;
+    private String nickname;
     /**
-     * description
+     * 微信头像地址
      */
-    private String description;
+    private String avatarUrl;
     /**
-     * phone
+     * 性别
      */
+    private Gender gender;
+
+    private String language;
+
     private String phone;
-    /**
-     * email
-     */
+
     private String email;
-    /**
-     * expire time
-     */
-    @DateTimeFormat(pattern = PARAMETER_FORMAT_TIME_ON)
-    @JSONField(format = PARAMETER_FORMAT_TIME_ON)
-    private Date expireTime;
-    /**
-     * user type 0:admin
-     */
-    private int userType;
-    /**
-     * resource space id
-     */
-    @TableField(exist = false)
-    private int resourceSpaceId;
-    /**
-     * resource space name
-     */
-    @TableField(exist = false)
-    private String resourceSpaceName;
-    /**
-     * resource space alias
-     */
-    @TableField(exist = false)
-    private String resourceSpaceAlias;
 
+    private String city;
+
+    private String country;
+
+    private Date lastLoginTime;
+    /**
+     * 用户当前的参加的active的婚礼
+     */
+    private int activeJoinId;
+    /**
+     * 0: active 1: deleted
+     */
+    private int deleted;
+    /**
+     * create by user id
+     */
+    private String createdBy;
+    /**
+     * update by user id
+     */
+    private String updatedBy;
+
+    private Date createTime;
+
+    private Date updateTime;
 }
-
-

@@ -18,17 +18,5 @@
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="cn.marring.dao.mapper.UserMapper">
-    <select id="queryAll" resultType="cn.marring.dao.entity.User">
-         SELECT
-    u.*,
-    rs.ID AS resource_space_id,
-    rs.resource_space_name,
-    rs.resource_space_alias
-FROM
-    t_matrix_user u
-    LEFT JOIN t_matrix_relation_resource_space_user r ON r.user_id = u.ID
-    LEFT JOIN t_matrix_resource_space rs ON rs.ID = r.resource_space_id
-    order by u.update_time desc
-    </select>
 </mapper>
 

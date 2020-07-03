@@ -1,7 +1,7 @@
 package cn.marring.api.filter;
 
 import cn.marring.api.configuration.AppContext;
-import cn.marring.dao.mapper.ConsumerMapper;
+import cn.marring.dao.mapper.UserMapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -31,7 +31,7 @@ public class ThirdSessionAuthFilter extends OncePerRequestFilter {
     private StringRedisTemplate stringRedisTemplate;
 
     @Autowired
-    private ConsumerMapper consumerMapper;
+    private UserMapper userMapper;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
