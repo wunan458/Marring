@@ -40,7 +40,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 // 允许对test的无授权访问
                 .antMatchers(HttpMethod.GET, "/test").permitAll()
                 // 对于获取token的rest api要允许匿名访问
-                .antMatchers("/auth").permitAll()
+                .antMatchers("/auth/auth_user").permitAll()
                 .antMatchers("/doc.html").permitAll()
                 .antMatchers("/webjars/*").permitAll()
                 .antMatchers("/swagger-resources").permitAll()

@@ -6,6 +6,8 @@ import cn.marring.api.jpa.WechatAuthenticationResponse;
 import cn.marring.api.service.WechatService;
 import cn.marring.api.utils.Result;
 import cn.marring.dao.entity.User;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiSort;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +18,20 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Map;
 
 /**
- * @author Wn 2020-06-30 11:32
+ * UserController
+ *
+ * @author Wn 2020-05-19 16:14
  */
+@Api(tags = "AUTH")
+@ApiSort(value = 1)
 @RestController
+@RequestMapping("/auth")
 public class AuthEndpoint extends BaseController {
 
     private static final Logger logger = LoggerFactory.getLogger(AuthEndpoint.class);
@@ -50,7 +58,7 @@ public class AuthEndpoint extends BaseController {
         return "testAuth_success";
     }
 
-    @PostMapping("/auth")
+    @PostMapping("/auth_user")
     public ResponseEntity<WechatAuthenticationResponse> createAuthenticationToken(@RequestBody AccountDto accountDto)
             throws AuthenticationException {
         WechatAuthenticationResponse jwtResponse = wechatService.wechatLogin(accountDto.getCode());
